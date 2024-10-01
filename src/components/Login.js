@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../utils/axiosConfig'; // Assuming you have axios setup
+import axios from 'axios'; // Assuming you have axios setup
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -16,7 +16,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/auth/login', formData);
+            const response = await axios.post('https://bgmi-tournament-v1.onrender.com/auth/login', formData);
             localStorage.setItem('token', response.data.token);
             alert('Login successful');
             navigate('/');

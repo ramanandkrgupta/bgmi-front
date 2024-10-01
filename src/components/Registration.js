@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../utils/axiosConfig'; // Assuming you have axios setup
+import axios from 'axios'; // Assuming you have axios setup
 
 const Registration = () => {
     const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const Registration = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/auth/register', formData);
+            await axios.post('https://bgmi-tournament-v1.onrender.com/auth/register', formData);
             alert('User registered successfully');
         } catch (error) {
             alert(error.response.data);
