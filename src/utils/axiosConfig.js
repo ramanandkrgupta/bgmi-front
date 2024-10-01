@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://bgmi-tournament-v1.onrender.com',
 });
 
 instance.interceptors.request.use((config) => {
