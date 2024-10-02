@@ -1,33 +1,24 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Registration from './components/Registration';
-import BottomMenu from './components/BottomMenu';
-import Login from './components/Login';
-import Home from './components/Home';
-// import Team from './components/Team';
-// import Refer from './components/Refer';
-// import Wallet from './components/Wallet';
-import MatchDetails from './components/MatchDetails';
-import Profile from './components/Profile';
-
-function App() {
-    return (
-        <Router>
-           
-            <Routes>
-                <Route path="/register" element={<Registration />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/match/:id" element={<MatchDetails />} />
-                <Route path="/profile" element={<Profile />} />
-      
-            </Routes>
-            <BottomMenu />
-        </Router>
-    );
-}
-
-// Sets up client-side routing using React Router v6,
-// defining routes for registration, login, home, match details, and profile pages. 
-// Includes a bottom menu for navigation.
-export default App;
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        const response = await axios.post('https://bgmi-tournament-v1.onrender.com/auth/login', formData);
+        
+        // Check if the token is present in the response
+        if (response.data && response.data.token) {
+            localStorage.setItem('token', response.data.token);
+            alert('Login successful');
+            navigate('/');
+        } else {
+            throw new Error('No token received');
+        }
+    } catch (error) {
+        console.error('Error during login:', error); // Log the entire error object for inspection
+        
+        // Check if it's an error with the response
+        if (error.response && error.response.data) {
+            setError(error.response.data.message || 'An error occurred. Please try again.');
+        } else {
+            setError('Unable to login. Please check your credentials and try again.');
+        }
+    }
+};
